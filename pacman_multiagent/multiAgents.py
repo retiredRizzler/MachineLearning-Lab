@@ -126,7 +126,7 @@ class MultiAgentSearchAgent(Agent):
       is another abstract class.
     """
 
-    def __init__(self, evalFn = 'score_evaluation_function', depth = '2'):
+    def __init__(self, evalFn = 'better', depth = '2'):
         self.index = 0 # Pacman is always agent index 0
         self.evaluationFunction = util.lookup(evalFn, globals())
         self.depth = int(depth)
@@ -160,7 +160,7 @@ class MinimaxAgent(MultiAgentSearchAgent):
         
         for action in pacman_actions:
           game_state_successor = game_state.generateSuccessor(0, action)
-          current_score = self.minimax_score(game_state_successor, 0, 1)
+          current_score = self.minimaxScore(game_state_successor, 0, 1)
           
           if current_score > best_score:
             best_score = current_score
@@ -168,7 +168,7 @@ class MinimaxAgent(MultiAgentSearchAgent):
         
         return best_action
                   
-    def minimax_score(self, game_state, current_depth, agent_index):
+    def minimaxScore(self, game_state, current_depth, agent_index):
       
       # Comme en algo 3, pour la récursivité on pose d'abord nos conditions de fin
       
@@ -187,14 +187,14 @@ class MinimaxAgent(MultiAgentSearchAgent):
         
         for action in legal_actions:
           game_state_successor = game_state.generatePacmanSuccessor(action)
-          score = max(score, self.minimax_score(game_state_successor, current_depth, next_agent))
+          score = max(score, self.minimaxScore(game_state_successor, current_depth, next_agent))
           
       else: # pour les ghost on veut le choix qui minimise le score de pacman
         score = float("inf")
         
         for action in legal_actions: 
           game_state_successor = game_state.generateSuccessor(agent_index, action)
-          score = min(score, self.minimax_score(game_state_successor, next_depth, next_agent))
+          score = min(score, self.minimaxScore(game_state_successor, next_depth, next_agent))
           
       return score
       
@@ -217,7 +217,7 @@ class AlphaBetaAgent(MultiAgentSearchAgent):
         
         for action in pacman_actions:
           game_state_successor = game_state.generateSuccessor(0, action)
-          current_score = self.minimax_score_alpha_beta(game_state_successor, 0, 1, alpha, beta)
+          current_score = self.minimaxScoreAlphaBeta(game_state_successor, 0, 1, alpha, beta)
           
           if current_score > best_score:
             best_score = current_score
@@ -227,7 +227,7 @@ class AlphaBetaAgent(MultiAgentSearchAgent):
         
         return best_action
         
-    def minimax_score_alpha_beta(self, game_state, current_depth, agent_index, alpha, beta):
+    def minimaxScoreAlphaBeta(self, game_state, current_depth, agent_index, alpha, beta):
       
       # Comme en algo 3, pour la récursivité on pose d'abord nos conditions de fin
       
@@ -246,7 +246,7 @@ class AlphaBetaAgent(MultiAgentSearchAgent):
         
         for action in legal_actions:
           game_state_successor = game_state.generatePacmanSuccessor(action)
-          score = max(score, self.minimax_score_alpha_beta(game_state_successor, current_depth, next_agent, alpha, beta))
+          score = max(score, self.minimaxScoreAlphaBeta(game_state_successor, current_depth, next_agent, alpha, beta))
 
           alpha = max(alpha, score)
           
@@ -258,7 +258,7 @@ class AlphaBetaAgent(MultiAgentSearchAgent):
         
         for action in legal_actions: 
           game_state_successor = game_state.generateSuccessor(agent_index, action)
-          score = min(score, self.minimax_score_alpha_beta(game_state_successor, next_depth, next_agent, alpha, beta))
+          score = min(score, self.minimaxScoreAlphaBeta(game_state_successor, next_depth, next_agent, alpha, beta))
           
           beta = min(beta, score)
           
@@ -287,7 +287,7 @@ class ExpectimaxAgent(MultiAgentSearchAgent):
         
         for action in pacman_actions:
           game_state_successor = game_state.generateSuccessor(0, action)
-          current_score = self.expectimax_score(game_state_successor, 0, 1)
+          current_score = self.expectimaxScore(game_state_successor, 0, 1)
           
           if current_score > best_score:
             best_score = current_score
@@ -295,7 +295,7 @@ class ExpectimaxAgent(MultiAgentSearchAgent):
         
         return best_action
       
-    def expectimax_score(self, game_state, current_depth, agent_index):
+    def expectimaxScore(self, game_state, current_depth, agent_index):
       # Comme en algo 3, pour la récursivité on pose d'abord nos conditions de fin
       
       if game_state.isWin() or game_state.isLose():
@@ -313,7 +313,7 @@ class ExpectimaxAgent(MultiAgentSearchAgent):
         
         for action in legal_actions:
           game_state_successor = game_state.generatePacmanSuccessor(action)
-          score = max(score, self.expectimax_score(game_state_successor, current_depth, next_agent))
+          score = max(score, self.expectimaxScore(game_state_successor, current_depth, next_agent))
           
             
       else: # pour les ghosts on veut l'espérance math. pour toutes les actions d'un ghost mais pour faciliter on fait moyenne arithmétique
@@ -321,7 +321,7 @@ class ExpectimaxAgent(MultiAgentSearchAgent):
         
         for action in legal_actions: 
           game_state_successor = game_state.generateSuccessor(agent_index, action)
-          score += self.expectimax_score(game_state_successor, next_depth, next_agent)
+          score += self.expectimaxScore(game_state_successor, next_depth, next_agent)
           
           # plus d' élaguage avec alpha beta car respecte plus les conditions adversariale, ici les ghosts ont un comportement aléatoires..
           
@@ -337,11 +337,59 @@ def betterEvaluationFunction(current_game_tate):
       Your extreme ghost-hunting, pellet-nabbing, food-gobbling, unstoppable
       evaluation function (question 5).
 
-      DESCRIPTION: <write something here so we know what you did>
+      DESCRIPTION: 
+      this function increase or decrease the score of a game_state towards different parameters : 
+      - the manhattan distance between pacman and food
+      - the manhattan distance between pacman ang ghosts, if they are scared or not 
+      - the remaining food
+      - the remaining capsules 
     """
-    "*** YOUR CODE HERE ***"
-    util.raise_not_defined()
-
+    
+    # on va s'inspirer de ma evaluation function du reflexagent et l'adapter pour qu'elle prenne qu'un seul parametre, gamestate
+    
+    score = current_game_tate.getScore()
+    pacman_pos = current_game_tate.getPacmanPosition()
+    food_list = current_game_tate.getFood().asList() # pour avoir direct les coord de chaque food au lieu d'un grid de boolean
+    ghost_states = current_game_tate.getGhostStates()
+    remaining_food = len(food_list)
+    capsules = current_game_tate.getCapsules()
+    
+    if food_list:
+          min_food_dist = min([util.manhattan_distance(food_pos, pacman_pos) for food_pos in food_list])
+          score += 5 / min_food_dist # on récompense plus pac est proche d'un food
+          
+    score -= 10 * remaining_food # on punit en fonction du nombre de nourriture qui reste (ça va forcer pac à aller chase la nourriture)
+     
+    for ghost_state in ghost_states:
+          ghost_pos = ghost_state.getPosition()
+          distance = util.manhattan_distance(ghost_pos, pacman_pos)
+          
+          if ghost_state.scaredTimer > 0:
+            score += 200 / distance # plus un ghost scared est proche plus on récompense
+          
+          else:
+            if distance < 2:
+              score -= 500 # si ghost pas scared est trop proche, on punit fooort 
+            elif distance < 4:
+              score -= 100 / distance 
+    
+    if capsules: 
+      min_capsule_dist = min([util.manhattan_distance(capsule, pacman_pos) for capsule in capsules]) # même principe qu'avec food
+      score += 10 / min_capsule_dist # on encourage pac à aller chercher les capsules proches 
+      
+    return score
+  
+    # il faudrait encore implémenter une manière de récompenser pacman (ou le punir) si il se retrouve dans un endroit "confiné"    
+    # voir commentaire eval function reflexagent
+    # ou encore une meilleure manière de manger des food, prévoir un certain chemin en fonction de la food la plus la plus distante
+    
+    # remarque : sur le layout par défault, pacman reste parfoit bloqué quand pas de fantomes à coté, mais se débloque plus ou moins vite en fonctione de la depth, 
+    # car plus on prévoit des coups plus on va voir qu'un ghost se rapproche, ça reste bizarre car il devrait chase la nourriture au lieu de rester aux même positions
+    # on pourrait punir si il revient plusieurs fois sur une même position 
+    
+    # update : après debug on remarque que le problème vient du fait qu'on calcule la distance manhattan sans prendre en compte les murs
+    # donc mur se trouve entre pacman et un food, la distance minimum sera biaisé car elle ne prendra pas en compte le mur qui empeche pacman d'atteindre la nourriture
+    
 # Abbreviation
-better = betterEvaluationFunction
+better = betterEvaluationFunction 
 
