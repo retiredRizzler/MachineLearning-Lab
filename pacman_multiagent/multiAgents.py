@@ -170,7 +170,7 @@ class MinimaxAgent(MultiAgentSearchAgent):
                   
     def minimax_score(self, game_state, current_depth, agent_index):
       
-      # Comme en algo 3, pour la récursivité on pose nos conditions de fin
+      # Comme en algo 3, pour la récursivité on pose d'abord nos conditions de fin
       
       if game_state.isWin() or game_state.isLose():
         return self.evaluationFunction(game_state)
@@ -229,7 +229,7 @@ class AlphaBetaAgent(MultiAgentSearchAgent):
         
     def minimax_score_alpha_beta(self, game_state, current_depth, agent_index, alpha, beta):
       
-      # Comme en algo 3, pour la récursivité on pose nos conditions de fin
+      # Comme en algo 3, pour la récursivité on pose d'abord nos conditions de fin
       
       if game_state.isWin() or game_state.isLose():
         return self.evaluationFunction(game_state)
@@ -251,9 +251,7 @@ class AlphaBetaAgent(MultiAgentSearchAgent):
           alpha = max(alpha, score)
           
           if alpha >= beta:
-            break # on élague en évitant d'explorer les autres actions
-          
-        
+            break # on élague en évitant d'explorer les autres actions si il y a un score plus élevé car les ghosts n'iront jamais choisir cette action
           
       else: # pour les ghost on veut le choix qui minimise le score de pacman
         score = float("inf")
@@ -269,24 +267,72 @@ class AlphaBetaAgent(MultiAgentSearchAgent):
       
       return score  
   
-        
-    
+      
 class ExpectimaxAgent(MultiAgentSearchAgent):
     """
       Your expectimax agent (question 4)
     """
 
-    def get_action(self, gameState):
+    def get_action(self, game_state):
         """
           Returns the expectimax action using self.depth and self.evaluationFunction
 
           All ghosts should be modeled as choosing uniformly at random from their
           legal moves.
         """
-        "*** YOUR CODE HERE ***"
-        util.raise_not_defined()
+        pacman_actions = game_state.getLegalPacmanActions()
+        
+        best_score = float("-inf")
+        best_action = None
+        
+        for action in pacman_actions:
+          game_state_successor = game_state.generateSuccessor(0, action)
+          current_score = self.expectimax_score(game_state_successor, 0, 1)
+          
+          if current_score > best_score:
+            best_score = current_score
+            best_action = action
+        
+        return best_action
+      
+    def expectimax_score(self, game_state, current_depth, agent_index):
+      # Comme en algo 3, pour la récursivité on pose d'abord nos conditions de fin
+      
+      if game_state.isWin() or game_state.isLose():
+        return self.evaluationFunction(game_state)
+      
+      if current_depth == self.depth and agent_index == 0: 
+        return self.evaluationFunction(game_state)
+      
+      legal_actions = game_state.getLegalActions(agent_index)
+      next_agent = 0 if agent_index + 1 == game_state.getNumAgents() else agent_index + 1
+      next_depth = current_depth + 1 if next_agent == 0 else current_depth
+      
+      if agent_index == 0: # Si pacman, on veut maximiser notre score
+        score = float("-inf")
+        
+        for action in legal_actions:
+          game_state_successor = game_state.generatePacmanSuccessor(action)
+          score = max(score, self.expectimax_score(game_state_successor, current_depth, next_agent))
+          
+            
+      else: # pour les ghosts on veut l'espérance math. pour toutes les actions d'un ghost mais pour faciliter on fait moyenne arithmétique
+        score = 0
+        
+        for action in legal_actions: 
+          game_state_successor = game_state.generateSuccessor(agent_index, action)
+          score += self.expectimax_score(game_state_successor, next_depth, next_agent)
+          
+          # plus d' élaguage avec alpha beta car respecte plus les conditions adversariale, ici les ghosts ont un comportement aléatoires..
+          
+        score = score / len(legal_actions)  
+        # faire gaffe ici on veut diviser sur la somme de TOUTES les actions et par sur chacune des actions donc division se fait en dehors de la boucle
+          
+          
+      return score    
+          
 
-def betterEvaluationFunction(currentGameState):
+def betterEvaluationFunction(current_game_tate):
     """
       Your extreme ghost-hunting, pellet-nabbing, food-gobbling, unstoppable
       evaluation function (question 5).
