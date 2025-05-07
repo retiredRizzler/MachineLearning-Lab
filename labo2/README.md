@@ -1,6 +1,6 @@
 # lab2 - Machine Learning
 
-Ce projet implémente l'algorithme K-means pour le clustering non-supervisé, en suivant les instructions du laboratoire de Machine Learning (4ALGL4A). Mon implémentation personnelle de K-means est comparée à celle de scikit-learn sur quatre datasets différents: Iris, Breast Cancer, Wine et Mall Customers.
+Ce projet implémente l'algorithme K-means pour le clustering non-supervisé, en suivant les instructions du laboratoire de Machine Learning (4ALGL4A). Notre implémentation personnelle de K-means est comparée à celle de scikit-learn sur quatre datasets différents: Iris, Breast Cancer, Wine et Mall Customers.
 
 ## Configuration et Exécution
 
@@ -9,7 +9,7 @@ Pour faciliter l'exécution et éviter les problèmes d'installation, nous recom
 1. Accédez à [Google Colab](https://colab.research.google.com/)
 2. Créez un nouveau notebook
 3. Téléchargez les fichiers Python dans le notebook:
-   - `iris_clustering.py`, `breast_cancer_clustering.py`, `wine_clustering.py`, `mall_customers_clustering.py`: Scripts d'analyse pour chaque dataset
+   - `iris_clustering.ipynb`, `breast_cancer_clustering.ipynb`, `wine_clustering.ipynb`, `mall_customers_clustering.ipynb`: Scripts d'analyse pour chaque dataset
 4. Enfin lancez chaque script (ctrl + enter) séparément pour voir le résultat sur chaque dataset accompagné de leurs données d'analyse. 
 
 
@@ -29,8 +29,8 @@ Pour faciliter l'exécution et éviter les problèmes d'installation, nous recom
 |  | K=2 | Scikit-learn | 0.3743 | 1658.76 |  |
 |  | K=3 | Notre K-means | 0.8975 | 1277.93 | Les deux implémentations donnent des résultats identiques |
 |  | K=3 | Scikit-learn | 0.8975 | 1277.93 | **Meilleur choix (K=3)**, correspond aux 3 types de vins |
-| **Mall Customers** | K=3 | Notre K-means | - | 301.91 | Les deux implémentations donnent des résultats identiques |
-|  | K=3 | Scikit-learn | - | 301.91 | Valeurs manquantes imputées dans Age et Annual Income |
+| **Mall Customers** | K=3 | Notre K-means | - | 301.91 | Valeurs manquantes imputées dans Age et Annual Income |
+|  | K=3 | Scikit-learn | - | 301.91 | Les deux implémentations donnent des résultats identiques |
 |  | K=5 | Notre K-means | - | 173.41 | Inertie fortement réduite par rapport à K=3 |
 |  | K=5 | Scikit-learn | - | 173.37 | **Meilleur choix (K=5)** selon l'inertie |
 
