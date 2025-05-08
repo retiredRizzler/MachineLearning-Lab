@@ -2,11 +2,9 @@
 
 ## Introduction
 
-Durant cette semaine, nous avons implémenté deux méthodes pour déterminer le nombre optimal de clusters K :
+Implémentation de deux méthodes pour déterminer le nombre optimal de clusters K :
 - **Méthode du coude** : Analyse visuelle du graphique (voir code)
 - **Méthode de la silhouette** : Recherche du K maximisant le score de silhouette moyen
-
-Nous avons appliqué ces méthodes à quatre datasets différents et comparé notre implémentation de K-means avec celle de scikit-learn.
 
 ## Tableau récapitulatif des résultats
 
