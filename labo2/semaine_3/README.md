@@ -1,17 +1,4 @@
-# lab2 - Machine Learning
-
-Ce projet implémente l'algorithme K-means pour le clustering non-supervisé, en suivant les instructions du laboratoire de Machine Learning (4ALGL4A). Notre implémentation personnelle de K-means est comparée à celle de scikit-learn sur quatre datasets différents: Iris, Breast Cancer, Wine et Mall Customers.
-
-## Configuration et Exécution
-
-Pour faciliter l'exécution et éviter les problèmes d'installation, nous recommandons d'utiliser Google Colab:
-
-1. Accédez à [Google Colab](https://colab.research.google.com/)
-2. Créez un nouveau notebook
-3. Téléchargez les fichiers Python dans le notebook:
-   - `iris_clustering.ipynb`, `breast_cancer_clustering.ipynb`, `wine_clustering.ipynb`, `mall_customers_clustering.ipynb`: Scripts d'analyse pour chaque dataset
-4. Enfin lancez chaque script (ctrl + enter) séparément pour voir le résultat sur chaque dataset accompagné de leurs données d'analyse. 
-
+# Rapport de la Semaine 3 - Comparaison entre Kmeans Scikit-learn et notre Kmeans
 
 ## Tableau Récapitulatif de l'Analyse des Résultats (Semaine 3)
 
