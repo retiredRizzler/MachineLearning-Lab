@@ -23,10 +23,10 @@ labo2/
 │   └── README.md 
 │
 └── semaine_5/
-    ├── iris_kmeans_pp.py
-    ├── breast_cancer_kmeans_pp.py
-    ├── wine_kmeans_pp.py
-    ├── mall_customers_kmeans_pp.py
+    ├── iris_semaine5.py
+    ├── breast_cancer_semaine5.py
+    ├── wine_semaine5.py
+    ├── mall_customers_semaine5.py
     └── README.md 
 ```
 
