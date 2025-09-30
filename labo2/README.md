@@ -1,10 +1,10 @@
-# Laboratoire 2 - Machine Learning
+# Laboratory 2 - Machine Learning
 
-Ce projet utilise l'algorithme K-means pour le clustering non-supervisé, ainsi que sa version améliorée K-means++. Les analyses sont effectuées sur quatre datasets différents: Iris, Breast Cancer, Wine et Mall Customers.
+This project uses the K-means algorithm for unsupervised clustering, as well as its improved version K-means++. Analyses are performed on four different datasets: Iris, Breast Cancer, Wine, and Mall Customers.
 
-## Structure du Projet
+## Project Structure
 
-Le projet est organisé en trois dossiers principaux, correspondant aux différentes semaines du laboratoire:
+The project is organized into three main folders, corresponding to the different weeks of the laboratory:
 
 ```
 labo2/
@@ -30,42 +30,48 @@ labo2/
     └── README.md 
 ```
 
-## Contenu des Semaines
+## Weekly Content
 
-### Semaine 3
-Implémentation de l'algorithme K-means de base et comparaison avec la version de scikit-learn. Tests effectués avec différentes valeurs de K prédéfinies (K=2 et K=3 ou K=5 pour Mall Customers). Évaluation des performances via l'Adjusted Rand Index (ARI) et l'inertie.
+### Week 3
 
-### Semaine 4
-Détermination du nombre optimal de clusters K en utilisant la méthode du coude et la méthode de la silhouette. Analyse détaillée des résultats pour chaque dataset et comparaison avec le nombre réel de classes lorsque connu.
+Implementation of the basic K-means algorithm and comparison with the scikit-learn version. Tests performed with different predefined K values (K=2 and K=3 or K=5 for Mall Customers). Performance evaluation using Adjusted Rand Index (ARI) and inertia.
 
-### Semaine 5
-Comparaison entre l'algorithme K-means standard et K-means++. Analyse des différences en termes de performance (ARI, inertie, silhouette), convergence (nombre d'itérations) et stabilité (variance des résultats avec différentes initialisations).
+### Week 4
 
-## Principaux Résultats
+Determination of the optimal number of clusters K using the elbow method and the silhouette method. Detailed analysis of results for each dataset and comparison with the actual number of classes when known.
 
-### Semaine 3 - K-means de Base
-- **Iris**: K=3 donne les meilleurs résultats (ARI=0.62), correspondant aux 3 espèces
-- **Breast Cancer**: K=2 est optimal (ARI=0.68), correspondant aux diagnostics malin/bénin
-- **Wine**: K=3 est optimal (ARI=0.90), correspondant aux 3 types de vins
-- **Mall Customers**: K=5 donne une inertie nettement meilleure que K=3
+### Week 5
 
-### Semaine 4 - Détermination du Nombre Optimal de Clusters
-- **Iris**: méthode du coude → K=3, méthode de silhouette → K=2
-- **Breast Cancer**: Les deux méthodes suggèrent K=2
-- **Wine**: Les deux méthodes suggèrent K=3
-- **Mall Customers**: méthode du coude → K=5, méthode de silhouette → K=6
+Comparison between standard K-means algorithm and K-means++. Analysis of differences in terms of performance (ARI, inertia, silhouette), convergence (number of iterations), and stability (variance of results with different initializations).
 
-### Semaine 5 - K-means vs K-means++
-- **Iris**: K-means++ converge plus rapidement mais montre une stabilité inférieure
-- **Breast Cancer**: Performances similaires, légère amélioration de convergence avec K-means++
-- **Wine**: K-means++ offre une stabilité remarquable (20-150 fois plus stable)
-- **Mall Customers**: K-means++ donne des clusters plus compacts avec une meilleure silhouette
+## Main Results
 
-## Configuration et Exécution
+### Week 3 - Basic K-means
 
-Pour faciliter l'exécution et éviter les problèmes d'installation, nous recommandons d'utiliser Google Colab:
+- **Iris**: K=3 gives the best results (ARI=0.62), corresponding to the 3 species
+- **Breast Cancer**: K=2 is optimal (ARI=0.68), corresponding to malignant/benign diagnoses
+- **Wine**: K=3 is optimal (ARI=0.90), corresponding to the 3 wine types
+- **Mall Customers**: K=5 gives significantly better inertia than K=3
 
-1. Accédez à [Google Colab](https://colab.research.google.com/)
-2. Créez un nouveau notebook
-3. Téléchargez les fichiers Python dans le notebook correspondant à la semaine que vous souhaitez exécuter
-4. Lancez chaque script (Ctrl + Enter) pour voir les résultats de l'analyse
+### Week 4 - Determining the Optimal Number of Clusters
+
+- **Iris**: elbow method → K=3, silhouette method → K=2
+- **Breast Cancer**: Both methods suggest K=2
+- **Wine**: Both methods suggest K=3
+- **Mall Customers**: elbow method → K=5, silhouette method → K=6
+
+### Week 5 - K-means vs K-means++
+
+- **Iris**: K-means++ converges faster but shows lower stability
+- **Breast Cancer**: Similar performance, slight convergence improvement with K-means++
+- **Wine**: K-means++ offers remarkable stability (20-150 times more stable)
+- **Mall Customers**: K-means++ produces more compact clusters with better silhouette scores
+
+## Setup and Execution
+
+To facilitate execution and avoid installation issues, we recommend using Google Colab:
+
+1. Access [Google Colab](https://colab.research.google.com/)
+2. Create a new notebook
+3. Upload the Python files into the notebook corresponding to the week you wish to execute
+4. Run each script (Ctrl + Enter) to see the analysis results
