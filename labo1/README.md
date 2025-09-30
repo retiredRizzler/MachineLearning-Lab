@@ -1,38 +1,40 @@
-# Laboratoire Pacman - Agents Rationnels
+# Pacman Laboratory - Rational Agents
 
-## Vue d'ensemble
-Ce laboratoire consiste en l'implémentation de différents types d'agents rationnels pour le jeu Pacman. Ces agents utilisent des algorithmes d'intelligence artificielle pour naviguer efficacement dans le labyrinthe, éviter les fantômes et manger toutes les gommes.
+![Python](https://img.shields.io/badge/Python-AI_Algorithms-3776AB?style=for-the-badge&logo=python&logoColor=white)
 
-## Agents implémentés
+## Overview
+This laboratory consists of implementing different types of rational agents for the Pacman game. These agents use artificial intelligence algorithms to efficiently navigate the maze, avoid ghosts, and eat all the pellets.
+
+## Implemented Agents
 
 ### ReflexAgent
-Un agent qui évalue chaque action possible en fonction de l'état du jeu résultant. Cette évaluation prend en compte:
-- La proximité des fantômes (punition pour être trop proche)
-- La proximité de la nourriture (récompense pour être proche)
-- Les récompenses pour manger de la nourriture
-- Un traitement spécial pour les fantômes effrayés
+An agent that evaluates each possible action based on the resulting game state. This evaluation takes into account:
+- Ghost proximity (penalty for being too close)
+- Food proximity (reward for being close)
+- Rewards for eating food
+- Special handling for scared ghosts
 
 ### MinimaxAgent
-Un agent qui utilise l'algorithme Minimax pour anticiper plusieurs coups à l'avance, en supposant que les fantômes cherchent à minimiser son score. L'agent:
-- Explore les actions possibles jusqu'à une profondeur définie
-- Suppose que les fantômes agissent de manière optimale contre lui
-- Choisit l'action qui maximise son score minimum possible
+An agent that uses the Minimax algorithm to anticipate several moves ahead, assuming that ghosts seek to minimize its score. The agent:
+- Explores possible actions up to a defined depth
+- Assumes ghosts act optimally against it
+- Chooses the action that maximizes its minimum possible score
 
 ### AlphaBetaAgent
-Une amélioration de l'agent Minimax qui utilise l'élagage alpha-bêta pour optimiser la recherche:
-- Réduit considérablement le temps de calcul
-- Permet d'explorer des profondeurs plus importantes
-- Conserve le même comportement que Minimax
+An improvement of the Minimax agent that uses alpha-beta pruning to optimize search:
+- Significantly reduces computation time
+- Allows exploration of greater depths
+- Maintains the same behavior as Minimax
 
 ### ExpectimaxAgent
-Un agent qui suppose que les fantômes se déplacent aléatoirement plutôt que de manière optimale:
-- Calcule l'espérance mathématique (moyenne) des scores pour les actions des fantômes
-- Est moins pessimiste que Minimax face à des adversaires non optimaux
-- Prend plus de risques quand cela est avantageux
+An agent that assumes ghosts move randomly rather than optimally:
+- Calculates the mathematical expectation (average) of scores for ghost actions
+- Is less pessimistic than Minimax when facing non-optimal adversaries
+- Takes more risks when advantageous
 
-### Fonction d'évaluation améliorée
-Une fonction d'évaluation avancée qui considère plusieurs facteurs:
-- Distance à la nourriture la plus proche
-- Nombre de gommes restantes
-- Position des fantômes (normaux et effrayés)
-- Présence et proximité des capsules
+### Enhanced Evaluation Function
+An advanced evaluation function that considers several factors:
+- Distance to the nearest food
+- Number of remaining pellets
+- Ghost positions (normal and scared)
+- Presence and proximity of power capsules
