@@ -1,4 +1,4 @@
-# Laboratory 2 - Machine Learning
+# K-means - Machine Learning
 
 This project uses the K-means algorithm for unsupervised clustering, as well as its improved version K-means++. Analyses are performed on four different datasets: Iris, Breast Cancer, Wine, and Mall Customers.
 
