@@ -4,10 +4,8 @@
 
 ## Project Source
 
-This laboratory is based on the UC Berkeley AI Pacman projects, adapted for the 4ALGL4A course at EPHEC (Academic Year 2024-2025). The original Berkeley project has been updated to use Python 3.
+This laboratory is based on the UC Berkeley AI Pacman projects, adapted for the 4ALGL4A course at ESI (Academic Year 2024-2025). The original Berkeley project has been updated to use Python 3.
 
-**Course:** Laboratoire 1 – Agents rationnels  
-**Instructors:** R. Absil, P. Bettens, E. Falkenauer, C. Leignel, T. Nicodeme, N. Vansteenkiste  
 **Original Source:** [UC Berkeley AI Pacman Project](https://ai.berkeley.edu/multiagent.html)
 
 ## Overview
