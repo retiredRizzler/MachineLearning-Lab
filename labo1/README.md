@@ -108,7 +108,7 @@ python pacman.py --frameTime 0 -p ReflexAgent -k 2
 ## Project Structure
 
 - `pacman.py` - Main game script with command-line interface
-- `multiAgents.py` - **Your agent implementations (modified)**
+- `multiAgents.py` - Implemented Agents
 - `game.py` - Game mechanics and rules
 - `ghostAgents.py` - Ghost agent implementations
 - `keyboardAgents.py` - Human player control
